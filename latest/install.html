@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; nMigen core 0.3.dev79 documentation</title>
+  <title>Installation &mdash; nMigen core 0.3.dev81 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                0.3.dev79+g399b8f9
+                0.3.dev81+gd5c297a
               </div>
             
           
@@ -239,8 +239,10 @@ $ pip3 install --editable .
 <p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">nmigen</span></code> directory will immediately affect any code that uses nMigen. To update the snapshot, run:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> nmigen
 $ git pull --ff-only origin master
+$ pip3 install --editable .
 </pre></div>
 </div>
+<p>It is important to run the <cite>pip3 install –editable .</cite> each time the development snapshot is updated in case package dependencies have been added or changed.</p>
 </div>
 </div>
 <div class="section" id="installing-board-definitions">
