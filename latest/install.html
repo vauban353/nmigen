@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; nMigen core 0.3.dev92 documentation</title>
+  <title>Installation &mdash; nMigen core 0.3.dev93 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.3.dev92+gf50303c
+                0.3.dev93+g43da4e3
               </div>
             
           
@@ -229,14 +229,14 @@
 <div class="tab-content docutils container" id="tab-macos">
 <p class="tab-title">macOS</p>
 <p>To install the latest release of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user --upgrade nmigen<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="tab-content docutils container" id="tab-linux">
 <p class="tab-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user --upgrade nmigen<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
@@ -259,18 +259,18 @@
 <div class="tab-content docutils container" id="tab-macos">
 <p class="tab-title">macOS</p>
 <p>To install the latest development snapshot of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user git+https://github.com/nmigen/nmigen.git#egg<span class="o">=</span>nmigen<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="tab-content docutils container" id="tab-linux">
 <p class="tab-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user git+https://github.com/nmigen/nmigen.git#egg<span class="o">=</span>nmigen<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user git+https://github.com/nmigen/nmigen.git#egg<span class="o">=</span>nmigen
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -300,13 +300,13 @@
 <p>To install an editable development snapshot of nMigen for the first time, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/nmigen/nmigen
 <span class="gp">$</span> <span class="nb">cd</span> nmigen
-<span class="gp">$</span> pip install --user --editable .<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<span class="gp">$</span> pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">nmigen</span></code> directory will immediately affect any code that uses nMigen. To update the snapshot, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> nmigen
 <span class="gp">$</span> git pull --ff-only origin master
-<span class="gp">$</span> pip install --user --editable .<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<span class="gp">$</span> pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>It is important to run the <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using nMigen may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
@@ -317,13 +317,13 @@
 <p>To install an editable development snapshot of nMigen for the first time, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/nmigen/nmigen
 <span class="gp">$</span> <span class="nb">cd</span> nmigen
-<span class="gp">$</span> pip3 install --user --editable .<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<span class="gp">$</span> pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">nmigen</span></code> directory will immediately affect any code that uses nMigen. To update the snapshot, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> nmigen
 <span class="gp">$</span> git pull --ff-only origin master
-<span class="gp">$</span> pip3 install --user --editable .<span class="o">[</span>builtin-yosys<span class="o">]</span>
+<span class="gp">$</span> pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>It is important to run the <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using nMigen may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
