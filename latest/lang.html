@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Language guide &mdash; nMigen toolchain 0.3.dev108 documentation</title>
+  <title>Language guide &mdash; nMigen toolchain 0.3.dev110 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.dev108+gfd5ee54
+                0.3.dev110+gf24f1b0
               </div>
             
           
@@ -89,7 +89,7 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Toolchain</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Language &amp; toolchain</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="start.html">Getting started</a></li>
@@ -195,7 +195,7 @@
     
       <li><a href="cover.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">Toolchain</a> &raquo;</li>
+          <li><a href="index.html">Language &amp; toolchain</a> &raquo;</li>
         
       <li>Language guide</li>
     
@@ -638,6 +638,14 @@
 <td><p>right rotate by constant amount</p></td>
 <td><p><a class="footnote-reference brackets" href="#opb3" id="id7">4</a></p></td>
 </tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a.shift_left(i)</span></code></p></td>
+<td><p>left shift by constant amount</p></td>
+<td><p><a class="footnote-reference brackets" href="#opb3" id="id8">4</a></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a.shift_right(i)</span></code></p></td>
+<td><p>right shift by constant amount</p></td>
+<td><p><a class="footnote-reference brackets" href="#opb3" id="id9">4</a></p></td>
+</tr>
 </tbody>
 </table>
 <dl class="footnote brackets">
@@ -647,18 +655,18 @@
 <dt class="label" id="opb2"><span class="brackets">3</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id5">2</a>)</span></dt>
 <dd><p>Shift amount must be unsigned; integer shifts in Python require the amount to be positive.</p>
 </dd>
-<dt class="label" id="opb3"><span class="brackets">4</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id7">2</a>)</span></dt>
-<dd><p>Rotate amount can be negative, in which case the direction is reversed.</p>
+<dt class="label" id="opb3"><span class="brackets">4</span><span class="fn-backref">(<a href="#id6">1</a>,<a href="#id7">2</a>,<a href="#id8">3</a>,<a href="#id9">4</a>)</span></dt>
+<dd><p>Shift and rotate amounts can be negative, in which case the direction is reversed.</p>
 </dd>
 </dl>
 <div class="admonition note" id="lang-hugeshift">
 <p class="admonition-title">Note</p>
-<p>Because nMigen ensures that the width of a left shift expression is wide enough to represent any possible result, left shift by a wide amount produces exponentially wider intermediate values, stressing the synthesis tools:</p>
+<p>Because nMigen ensures that the width of a variable left shift expression is wide enough to represent any possible result, variable left shift by a wide amount produces exponentially wider intermediate values, stressing the synthesis tools:</p>
 <div class="highlight-pycon3 notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">C</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span>
 <span class="go">unsigned(4294967296)</span>
 </pre></div>
 </div>
-<p>Although nMigen will detect and reject expressions wide enough to break other tools, it is a good practice to explicitly limit the width of a non-constant shift amount in a left shift.</p>
+<p>Although nMigen will detect and reject expressions wide enough to break other tools, it is a good practice to explicitly limit the width of a shift amount in a variable left shift.</p>
 </div>
 </div>
 <div class="section" id="reduction-operators">
@@ -681,11 +689,11 @@
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a.all()</span></code></p></td>
 <td><p>reduction AND; are all bits set?</p></td>
-<td><p><a class="footnote-reference brackets" href="#opr1" id="id8">5</a></p></td>
+<td><p><a class="footnote-reference brackets" href="#opr1" id="id10">5</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a.any()</span></code></p></td>
 <td><p>reduction OR; is any bit set?</p></td>
-<td><p><a class="footnote-reference brackets" href="#opr1" id="id9">5</a></p></td>
+<td><p><a class="footnote-reference brackets" href="#opr1" id="id11">5</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a.xor()</span></code></p></td>
 <td><p>reduction XOR; is an odd number of bits set?</p></td>
@@ -693,15 +701,15 @@
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a.bool()</span></code></p></td>
 <td><p>conversion to boolean; is non-zero?</p></td>
-<td><p><a class="footnote-reference brackets" href="#opr2" id="id10">6</a></p></td>
+<td><p><a class="footnote-reference brackets" href="#opr2" id="id12">6</a></p></td>
 </tr>
 </tbody>
 </table>
 <dl class="footnote brackets">
-<dt class="label" id="opr1"><span class="brackets">5</span><span class="fn-backref">(<a href="#id8">1</a>,<a href="#id9">2</a>)</span></dt>
+<dt class="label" id="opr1"><span class="brackets">5</span><span class="fn-backref">(<a href="#id10">1</a>,<a href="#id11">2</a>)</span></dt>
 <dd><p>Conceptually the same as applying the Python <a class="reference external" href="https://docs.python.org/3/library/functions.html#all" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">all()</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/functions.html#any" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">any()</span></code></a> function to the value viewed as a collection of bits.</p>
 </dd>
-<dt class="label" id="opr2"><span class="brackets"><a class="fn-backref" href="#id10">6</a></span></dt>
+<dt class="label" id="opr2"><span class="brackets"><a class="fn-backref" href="#id12">6</a></span></dt>
 <dd><p>Conceptually the same as applying the Python <code class="xref py py-func docutils literal notranslate"><span class="pre">bool()</span></code> function to the value viewed as an integer.</p>
 </dd>
 </dl>
@@ -810,11 +818,11 @@
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">len(a)</span></code></p></td>
 <td><p>bit length; value width</p></td>
-<td><p><a class="footnote-reference brackets" href="#ops1" id="id11">7</a></p></td>
+<td><p><a class="footnote-reference brackets" href="#ops1" id="id13">7</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a[i:j:k]</span></code></p></td>
 <td><p>bit slicing by constant subscripts</p></td>
-<td><p><a class="footnote-reference brackets" href="#ops2" id="id12">8</a></p></td>
+<td><p><a class="footnote-reference brackets" href="#ops2" id="id14">8</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">iter(a)</span></code></p></td>
 <td><p>bit iteration</p></td>
@@ -830,7 +838,7 @@
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Cat(a,</span> <span class="pre">b)</span></code></p></td>
 <td><p>concatenation</p></td>
-<td><p><a class="footnote-reference brackets" href="#ops3" id="id13">9</a></p></td>
+<td><p><a class="footnote-reference brackets" href="#ops3" id="id15">9</a></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Repl(a,</span> <span class="pre">i)</span></code></p></td>
 <td><p>replication</p></td>
@@ -839,13 +847,13 @@
 </tbody>
 </table>
 <dl class="footnote brackets">
-<dt class="label" id="ops1"><span class="brackets"><a class="fn-backref" href="#id11">7</a></span></dt>
+<dt class="label" id="ops1"><span class="brackets"><a class="fn-backref" href="#id13">7</a></span></dt>
 <dd><p>Words “length” and “width” have the same meaning when talking about nMigen values. Conventionally, “width” is used.</p>
 </dd>
-<dt class="label" id="ops2"><span class="brackets"><a class="fn-backref" href="#id12">8</a></span></dt>
+<dt class="label" id="ops2"><span class="brackets"><a class="fn-backref" href="#id14">8</a></span></dt>
 <dd><p>All variations of the Python slice notation are supported, including “extended slicing”. E.g. all of <code class="docutils literal notranslate"><span class="pre">a[0]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[1:9]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[2:]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[:-2]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[::-1]</span></code>, <code class="docutils literal notranslate"><span class="pre">a[0:8:2]</span></code> select bits in the same way as other Python sequence types select their elements.</p>
 </dd>
-<dt class="label" id="ops3"><span class="brackets"><a class="fn-backref" href="#id13">9</a></span></dt>
+<dt class="label" id="ops3"><span class="brackets"><a class="fn-backref" href="#id15">9</a></span></dt>
 <dd><p>In the concatenated value, <code class="docutils literal notranslate"><span class="pre">a</span></code> occupies the least significant bits, and <code class="docutils literal notranslate"><span class="pre">b</span></code> the most significant bits.</p>
 </dd>
 </dl>
