@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Language guide &mdash; nMigen toolchain 0.3.dev110 documentation</title>
+  <title>Language guide &mdash; nMigen toolchain 0.3.dev111 documentation</title>
   
 
   
@@ -39,7 +39,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Getting started" href="start.html" /> 
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.dev110+gf24f1b0
+                0.3.dev111+gf115335
               </div>
             
           
@@ -93,6 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="intro.html">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="start.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Language guide</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-prelude">The prelude</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#values">Values</a></li>
@@ -222,7 +223,7 @@
 <p class="admonition-title">Warning</p>
 <p>This guide is a work in progress and is seriously incomplete!</p>
 </div>
-<p>This guide introduces the nMigen language in depth. It assumes familiarity with synchronous digital logic and the Python programming language, but does not require experience with any hardware description language.</p>
+<p>This guide introduces the nMigen language in depth. It assumes familiarity with synchronous digital logic and the Python programming language, but does not require prior experience with any hardware description language. See the <a class="reference internal" href="tutorial.html"><span class="doc">tutorial</span></a> for a step-by-step introduction to the language.</p>
 <div class="section" id="the-prelude">
 <span id="lang-prelude"></span><h2>The prelude<a class="headerlink" href="#the-prelude" title="Permalink to this headline">¶</a></h2>
 <p>Because nMigen is a regular Python library, it needs to be imported before use. The root <code class="docutils literal notranslate"><span class="pre">nmigen</span></code> module, called <em>the prelude</em>, is carefully curated to export a small amount of the most essential names, useful in nearly every design. In source files dedicated to nMigen code, it is a good practice to use a <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html#tut-pkg-import-star" title="(in Python v3.8)"><span class="xref std std-ref">glob import</span></a> for readability:</p>
@@ -1106,7 +1107,7 @@ inside `Else`
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="start.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
