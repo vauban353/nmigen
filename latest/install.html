@@ -7,14 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; nMigen toolchain 0.3.dev111 documentation</title>
+  <title>Installation &mdash; nMigen toolchain 0.3.dev113 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="_static/contentui.css" type="text/css" />
+  <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
 
   
   
@@ -32,7 +32,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
-        <script src="_static/contentui.js"></script>
+        <script src="_static/platformpicker.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.3.dev111+gf115335
+                0.3.dev113+g175c8a5
               </div>
             
           
@@ -188,22 +188,21 @@
 </div>
 <div class="section" id="installing-prerequisites">
 <span id="install-deps"></span><h2>Installing prerequisites<a class="headerlink" href="#installing-prerequisites" title="Permalink to this headline">¶</a></h2>
-<div class="content-tabs docutils container">
-<div class="tab-content docutils container" id="tab-windows">
-<p class="tab-title">Windows</p>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
 <p><a class="reference external" href="https://docs.python.org/3/using/windows.html#using-on-windows" title="(in Python v3.8)"><span class="xref std std-ref">Install Python</span></a>, either from Windows Store or using the full installer. If using the full installer, make sure to install a 64-bit version of Python.</p>
 <p><a class="reference external" href="https://sourceforge.net/projects/gtkwave/files/">Download GTKWave</a>, either win32 or win64 binaries. GTKWave does not need to be installed; it can be unpacked to any convenient location and run from there.</p>
 </div>
-<div class="tab-content docutils container" id="tab-macos">
-<p class="tab-title">macOS</p>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
 <p>Install <a class="reference external" href="https://brew.sh">Homebrew</a>. Then, install Python and GTKWave by running:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> brew install python gtkwave
 </pre></div>
 </div>
 </div>
-<div class="tab-content docutils container" id="tab-linux">
-<p class="tab-title">Linux</p>
-<p class="rubric">Debian-based distributions</p>
+<div class="platform-choice platform--debian platform--linux docutils container">
+<p class="platform-title">Debian</p>
 <p>Install Python and GTKWave by running:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install python3-pip gtkwave
 </pre></div>
@@ -213,7 +212,9 @@
 </pre></div>
 </div>
 <p>If Yosys 0.9 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
-<p class="rubric">Other distributions</p>
+</div>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Other Linux</p>
 <p>Install Python and GTKWave from the package repository of your distribution.</p>
 <p>On architectures other than x86_64 and AArch64, install Yosys from the package repository of your distribution.</p>
 <p>If Yosys 0.9 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
@@ -225,23 +226,23 @@
 <p>The latest release of nMigen should work well for most applications. A development snapshot—any commit from the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of nMigen—should be similarly reliable, but is likely to include experimental API changes that will be in flux until the next release. With that in mind, development snapshots can be used to try out new functionality or to avoid bugs fixed since the last release.</p>
 <div class="section" id="latest-release">
 <span id="install-release"></span><h3>Latest release<a class="headerlink" href="#latest-release" title="Permalink to this headline">¶</a></h3>
-<div class="content-tabs docutils container">
-<div class="tab-content docutils container" id="tab-windows">
-<p class="tab-title">Windows</p>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
 <p>To install the latest release of nMigen, run:</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pip install --upgrade nmigen[builtin-yosys]
 </pre></div>
 </div>
 </div>
-<div class="tab-content docutils container" id="tab-macos">
-<p class="tab-title">macOS</p>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
 <p>To install the latest release of nMigen, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
-<div class="tab-content docutils container" id="tab-linux">
-<p class="tab-title">Linux</p>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of nMigen, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
 </pre></div>
@@ -255,23 +256,23 @@
 </div>
 <div class="section" id="development-snapshot">
 <span id="install-snapshot"></span><h3>Development snapshot<a class="headerlink" href="#development-snapshot" title="Permalink to this headline">¶</a></h3>
-<div class="content-tabs docutils container">
-<div class="tab-content docutils container" id="tab-windows">
-<p class="tab-title">Windows</p>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
 <p>To install the latest development snapshot of nMigen, run:</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> pip install git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]
 </pre></div>
 </div>
 </div>
-<div class="tab-content docutils container" id="tab-macos">
-<p class="tab-title">macOS</p>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
 <p>To install the latest development snapshot of nMigen, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
-<div class="tab-content docutils container" id="tab-linux">
-<p class="tab-title">Linux</p>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of nMigen, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
 </pre></div>
@@ -285,9 +286,9 @@
 </div>
 <div class="section" id="editable-development-snapshot">
 <span id="install-develop"></span><h3>Editable development snapshot<a class="headerlink" href="#editable-development-snapshot" title="Permalink to this headline">¶</a></h3>
-<div class="content-tabs docutils container">
-<div class="tab-content docutils container" id="tab-windows">
-<p class="tab-title">Windows</p>
+<div class="platform-picker docutils container">
+<div class="platform-choice platform--windows platform-noaltname docutils container">
+<p class="platform-title">Windows</p>
 <p>To install an editable development snapshot of nMigen for the first time, run:</p>
 <div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;</span> git clone https://github.com/nmigen/nmigen
 <span class="gp">&gt;</span> <span class="k">cd</span> nmigen
@@ -302,8 +303,8 @@
 </div>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using nMigen may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
 </div>
-<div class="tab-content docutils container" id="tab-macos">
-<p class="tab-title">macOS</p>
+<div class="platform-choice platform--macos platform-noaltname docutils container">
+<p class="platform-title">macOS</p>
 <p>To install an editable development snapshot of nMigen for the first time, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/nmigen/nmigen
 <span class="gp">$</span> <span class="nb">cd</span> nmigen
@@ -318,8 +319,8 @@
 </div>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using nMigen may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
 </div>
-<div class="tab-content docutils container" id="tab-linux">
-<p class="tab-title">Linux</p>
+<div class="platform-choice platform--linux platform-noaltname docutils container">
+<p class="platform-title">Linux</p>
 <p>If you <strong>did</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, omit <code class="docutils literal notranslate"><span class="pre">[builtin-yosys]</span></code> from the following commands.</p>
 <p>To install an editable development snapshot of nMigen for the first time, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/nmigen/nmigen

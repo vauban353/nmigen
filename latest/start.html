@@ -7,14 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Getting started &mdash; nMigen toolchain 0.3.dev111 documentation</title>
+  <title>Getting started &mdash; nMigen toolchain 0.3.dev113 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  <link rel="stylesheet" href="_static/contentui.css" type="text/css" />
+  <link rel="stylesheet" href="_static/platformpicker.css" type="text/css" />
 
   
   
@@ -32,7 +32,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
-        <script src="_static/contentui.js"></script>
+        <script src="_static/platformpicker.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.3.dev111+gf115335
+                0.3.dev113+g175c8a5
               </div>
             
           
@@ -187,48 +187,48 @@
 <div class="section" id="implementing-a-counter">
 <h3>Implementing a counter<a class="headerlink" href="#implementing-a-counter" title="Permalink to this headline">¶</a></h3>
 <p>A 16-bit up counter with enable input, overflow output, and a limit fixed at design time can be implemented in nMigen as follows:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1</pre>
+<pre> 2</pre>
+<pre> 3</pre>
+<pre> 4</pre>
+<pre> 5</pre>
+<pre> 6</pre>
+<pre> 7</pre>
+<pre> 8</pre>
+<pre> 9</pre>
+<pre>10</pre>
+<pre>11</pre>
+<pre>12</pre>
+<pre>13</pre>
+<pre>14</pre>
+<pre>15</pre>
+<pre>16</pre>
+<pre>17</pre>
+<pre>18</pre>
+<pre>19</pre>
+<pre>20</pre>
+<pre>21</pre>
+<pre>22</pre>
+<pre>23</pre>
+<pre>24</pre>
+<pre>25</pre>
+<pre>26</pre>
+<pre>27</pre>
+<pre>28</pre>
+<pre>29</pre>
+<pre>30</pre>
+<pre>31</pre>
+<pre>32</pre>
+<pre>33</pre>
+<pre>34</pre>
+<pre>35</pre>
+<pre>36</pre>
+<pre>37</pre>
+<pre>38</pre>
+<pre>39</pre>
+<pre>40</pre>
+<pre>41</pre>
+<pre>42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen</span> <span class="kn">import</span> <span class="o">*</span>
 
 
 <span class="k">class</span> <span class="nc">UpCounter</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
@@ -278,35 +278,35 @@
 <div class="section" id="testing-a-counter">
 <h3>Testing a counter<a class="headerlink" href="#testing-a-counter" title="Permalink to this headline">¶</a></h3>
 <p>To verify its functionality, the counter can be simulated for a small amount of time, with a test bench driving it and checking a few simple conditions:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen.back.pysim</span> <span class="kn">import</span> <span class="n">Simulator</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>44</pre>
+<pre>45</pre>
+<pre>46</pre>
+<pre>47</pre>
+<pre>48</pre>
+<pre>49</pre>
+<pre>50</pre>
+<pre>51</pre>
+<pre>52</pre>
+<pre>53</pre>
+<pre>54</pre>
+<pre>55</pre>
+<pre>56</pre>
+<pre>57</pre>
+<pre>58</pre>
+<pre>59</pre>
+<pre>60</pre>
+<pre>61</pre>
+<pre>62</pre>
+<pre>63</pre>
+<pre>64</pre>
+<pre>65</pre>
+<pre>66</pre>
+<pre>67</pre>
+<pre>68</pre>
+<pre>69</pre>
+<pre>70</pre>
+<pre>71</pre>
+<pre>72</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen.back.pysim</span> <span class="kn">import</span> <span class="n">Simulator</span>
 
 
 <span class="n">dut</span> <span class="o">=</span> <span class="n">UpCounter</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
@@ -344,12 +344,12 @@
 <div class="section" id="converting-a-counter">
 <h3>Converting a counter<a class="headerlink" href="#converting-a-counter" title="Permalink to this headline">¶</a></h3>
 <p>Although some nMigen workflows do not include Verilog at all, it is still the de facto standard for HDL interoperability. Any nMigen design can be converted to synthesizable Verilog using the corresponding backend:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>74
-75
-76
-77
-78
-79</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen.back</span> <span class="kn">import</span> <span class="n">verilog</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>74</pre>
+<pre>75</pre>
+<pre>76</pre>
+<pre>77</pre>
+<pre>78</pre>
+<pre>79</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen.back</span> <span class="kn">import</span> <span class="n">verilog</span>
 
 
 <span class="n">top</span> <span class="o">=</span> <span class="n">UpCounter</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
@@ -358,55 +358,55 @@
 </pre></div>
 </td></tr></table></div>
 <p>The signals that will be connected to the ports of the top-level Verilog module should be specified explicitly. The rising edge clock and synchronous reset signals of the <code class="docutils literal notranslate"><span class="pre">sync</span></code> domain are added automatically; if necessary, the control signals can be configured explicitly. The result is the following Verilog code (lightly edited for clarity):</p>
-<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">generator</span> <span class="o">=</span> <span class="s">&quot;nMigen&quot;</span> <span class="o">*</span><span class="p">)</span>
+<div class="highlight-verilog notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1</pre>
+<pre> 2</pre>
+<pre> 3</pre>
+<pre> 4</pre>
+<pre> 5</pre>
+<pre> 6</pre>
+<pre> 7</pre>
+<pre> 8</pre>
+<pre> 9</pre>
+<pre>10</pre>
+<pre>11</pre>
+<pre>12</pre>
+<pre>13</pre>
+<pre>14</pre>
+<pre>15</pre>
+<pre>16</pre>
+<pre>17</pre>
+<pre>18</pre>
+<pre>19</pre>
+<pre>20</pre>
+<pre>21</pre>
+<pre>22</pre>
+<pre>23</pre>
+<pre>24</pre>
+<pre>25</pre>
+<pre>26</pre>
+<pre>27</pre>
+<pre>28</pre>
+<pre>29</pre>
+<pre>30</pre>
+<pre>31</pre>
+<pre>32</pre>
+<pre>33</pre>
+<pre>34</pre>
+<pre>35</pre>
+<pre>36</pre>
+<pre>37</pre>
+<pre>38</pre>
+<pre>39</pre>
+<pre>40</pre>
+<pre>41</pre>
+<pre>42</pre>
+<pre>43</pre>
+<pre>44</pre>
+<pre>45</pre>
+<pre>46</pre>
+<pre>47</pre>
+<pre>48</pre>
+<pre>49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">*</span> <span class="n">generator</span> <span class="o">=</span> <span class="s">&quot;nMigen&quot;</span> <span class="o">*</span><span class="p">)</span>
 <span class="k">module</span> <span class="n">top</span><span class="p">(</span><span class="n">clk</span><span class="p">,</span> <span class="n">rst</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">ovf</span><span class="p">);</span>
   <span class="p">(</span><span class="o">*</span> <span class="n">src</span> <span class="o">=</span> <span class="s">&quot;&lt;nmigen-root&gt;/nmigen/hdl/ir.py:526&quot;</span> <span class="o">*</span><span class="p">)</span>
   <span class="k">input</span> <span class="n">clk</span><span class="p">;</span>
@@ -467,25 +467,25 @@
 <div class="section" id="a-blinking-led">
 <h2>A blinking LED<a class="headerlink" href="#a-blinking-led" title="Permalink to this headline">¶</a></h2>
 <p>Although nMigen works well as a standalone HDL, it also includes a build system that integrates with FPGA toolchains, and many board definition files for common developer boards that include pinouts and programming adapter invocations. The following code will blink a LED with a frequency of 1 Hz on any board that has a LED and an oscillator:</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1</pre>
+<pre> 2</pre>
+<pre> 3</pre>
+<pre> 4</pre>
+<pre> 5</pre>
+<pre> 6</pre>
+<pre> 7</pre>
+<pre> 8</pre>
+<pre> 9</pre>
+<pre>10</pre>
+<pre>11</pre>
+<pre>12</pre>
+<pre>13</pre>
+<pre>14</pre>
+<pre>15</pre>
+<pre>16</pre>
+<pre>17</pre>
+<pre>18</pre>
+<pre>19</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen</span> <span class="kn">import</span> <span class="o">*</span>
 
 
 <span class="k">class</span> <span class="nc">LEDBlinker</span><span class="p">(</span><span class="n">Elaboratable</span><span class="p">):</span>
@@ -511,10 +511,10 @@
 <p class="admonition-title">Todo</p>
 <p>Link to the installation instructions for the FOSS iCE40 toolchain, probably as a part of board documentation.</p>
 </div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>21
-22
-23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen_boards.icestick</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>21</pre>
+<pre>22</pre>
+<pre>23</pre>
+<pre>24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">nmigen_boards.icestick</span> <span class="kn">import</span> <span class="o">*</span>
 
 
 <span class="n">ICEStickPlatform</span><span class="p">()</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">LEDBlinker</span><span class="p">(),</span> <span class="n">do_program</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
