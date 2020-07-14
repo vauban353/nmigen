@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Installation &mdash; nMigen toolchain 0.3.dev138 documentation</title>
+  <title>Installation &mdash; nMigen toolchain 0.3.dev139 documentation</title>
   
 
   
@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                0.3.dev138+g127fce8
+                0.3.dev139+gd714d78
               </div>
             
           
@@ -213,6 +213,13 @@
 </div>
 <p>If Yosys 0.9 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
 </div>
+<div class="platform-choice platform--arch platform--linux docutils container">
+<p class="platform-title">Arch Linux</p>
+<p>Install Python, pip, GTKWave and Yosys by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo pacman -S python python-pip gtkwave yosys
+</pre></div>
+</div>
+</div>
 <div class="platform-choice platform--linux platform-noaltname docutils container">
 <p class="platform-title">Other Linux</p>
 <p>Install Python and GTKWave from the package repository of your distribution.</p>
@@ -249,6 +256,13 @@
 </div>
 <p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user --upgrade nmigen
+</pre></div>
+</div>
+</div>
+<div class="platform-choice platform--arch platform--linux docutils container">
+<p class="platform-title">Arch Linux</p>
+<p>To install the latest release of nMigen, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo pacman -S python-nmigen
 </pre></div>
 </div>
 </div>
