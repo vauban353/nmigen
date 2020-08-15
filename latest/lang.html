@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Language guide &mdash; nMigen toolchain 0.3.dev155 documentation</title>
+  <title>Language guide &mdash; nMigen toolchain 0.3.dev156 documentation</title>
   
 
   
@@ -63,7 +63,7 @@
             
             
               <div class="version">
-                0.3.dev155+g73f672f
+                0.3.dev156+ge46118d
               </div>
             
           
@@ -829,11 +829,11 @@
 <td><p>bit iteration</p></td>
 <td></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a.bit_select(b,</span> <span class="pre">i)</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a.bit_select(b,</span> <span class="pre">w)</span></code></p></td>
 <td><p>overlapping part select with variable offset</p></td>
 <td></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a.word_select(b,</span> <span class="pre">i)</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a.word_select(b,</span> <span class="pre">w)</span></code></p></td>
 <td><p>non-overlapping part select with variable offset</p></td>
 <td></td>
 </tr>
@@ -841,7 +841,7 @@
 <td><p>concatenation</p></td>
 <td><p><a class="footnote-reference brackets" href="#ops3" id="id15">9</a></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Repl(a,</span> <span class="pre">i)</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Repl(a,</span> <span class="pre">n)</span></code></p></td>
 <td><p>replication</p></td>
 <td></td>
 </tr>
@@ -873,14 +873,14 @@
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Cat(a,</span> <span class="pre">b)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Repl(a,</span> <span class="pre">i)</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">i</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Repl(a,</span> <span class="pre">n)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">*</span> <span class="pre">n</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a.bit_select(b,</span> <span class="pre">i)</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">a[b:b+i]</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">a.bit_select(b,</span> <span class="pre">w)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a[b:b+w]</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a.word_select(b,</span> <span class="pre">i)</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">a[b*i:b*i+i]</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">a.word_select(b,</span> <span class="pre">w)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a[b*w:b*w+w]</span></code></p></td>
 </tr>
 </tbody>
 </table>
