@@ -5,6 +5,10 @@ from . import rtlil
 __all__ = ["YosysError", "convert", "convert_fragment"]
 
 
+def _find_yosys():
+    return find_yosys(lambda ver: ver >= (0, 9, 3468))
+
+
 def _convert_rtlil_text(rtlil_text, black_boxes, *, src_loc_at=0):
     if black_boxes is not None:
         if not isinstance(black_boxes, dict):
@@ -18,17 +22,15 @@ def _convert_rtlil_text(rtlil_text, black_boxes, *, src_loc_at=0):
                 raise TypeError("CXXRTL black box source code must be a string, not {!r}"
                                 .format(box_source))
 
-    yosys = find_yosys(lambda ver: ver >= (0, 9, 3468))
-
     script = []
     if black_boxes is not None:
         for box_name, box_source in black_boxes.items():
             script.append("read_ilang <<rtlil\n{}\nrtlil".format(box_source))
     script.append("read_ilang <<rtlil\n{}\nrtlil".format(rtlil_text))
     script.append("delete w:$verilog_initial_trigger")
-    script.append("write_cxxrtl")
+    script.append("write_cxxrtl -Og")
 
-    return yosys.run(["-q", "-"], "\n".join(script), src_loc_at=1 + src_loc_at)
+    return _find_yosys().run(["-q", "-"], "\n".join(script), src_loc_at=1 + src_loc_at)
 
 
 def convert_fragment(*args, black_boxes=None, **kwargs):
