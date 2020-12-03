@@ -151,6 +151,10 @@ class cxxrtl_library:
         self.destroy.argtypes = [cxxrtl_handle]
         self.destroy.restype = None
 
+        self.reset = library.cxxrtl_reset
+        self.reset.argtypes = [cxxrtl_handle]
+        self.reset.restype = None
+
         self.eval = library.cxxrtl_eval
         self.eval.argtypes = [cxxrtl_handle]
         self.eval.restype = c_int

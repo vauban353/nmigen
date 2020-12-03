@@ -42,7 +42,7 @@ class _CxxSignalState(BaseSignalState):
             part.next = value
 
     def reset(self):
-        # FIXME: assert self.owned
+        assert self.owned
 
         for part in self.parts:
             part.curr = part.next = self.signal.reset
@@ -88,9 +88,10 @@ class _CxxSimulation(BaseSimulation):
 
     def reset(self):
         self.timeline.reset()
-        # FIXME: reset cxxrtl state properly
-        for signal, index in self.signals.items():
-            self.slots[index].reset()
+        self.cxxlib.reset(self.rtl_handle)
+        for signal_state in self.slots:
+            if signal_state.owned:
+                signal_state.reset()
 
     def _add_signal(self, signal, signal_state):
         index = len(self.slots)
