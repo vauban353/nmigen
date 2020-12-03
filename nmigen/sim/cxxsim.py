@@ -178,8 +178,7 @@ class CxxSimEngine(BaseEngine):
         self._build_dir, so_filename = build_cxx(
             cxx_sources={"sim.cc": cxx_source},
             include_dirs=[yosys.data_dir() / "include"],
-            # FIXME: cxxrtl_vcd should not just ignore contract violations with NDEBUG
-            macros=["NDEBUG", "CXXRTL_INCLUDE_CAPI_IMPL", "CXXRTL_INCLUDE_VCD_CAPI_IMPL"],
+            macros=["CXXRTL_NDEBUG", "CXXRTL_INCLUDE_CAPI_IMPL", "CXXRTL_INCLUDE_VCD_CAPI_IMPL"],
             output_name="sim"
         )
         cxxlib = cxxrtl_library(os.path.join(self._build_dir.name, so_filename))

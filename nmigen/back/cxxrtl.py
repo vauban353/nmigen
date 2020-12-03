@@ -6,7 +6,8 @@ __all__ = ["YosysError", "convert", "convert_fragment"]
 
 
 def _find_yosys():
-    return find_yosys(lambda ver: ver >= (0, 9, 3468))
+    # this version requirement needs to be synchronized with the one in setup.py!
+    return find_yosys(lambda ver: ver >= (0, 9, 3743))
 
 
 def _convert_rtlil_text(rtlil_text, black_boxes, *, src_loc_at=0):

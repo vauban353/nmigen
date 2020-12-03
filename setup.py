@@ -46,8 +46,8 @@ setup(
         "Jinja2~=2.11", # for nmigen.build
     ],
     extras_require={
-        # this version requirement needs to be synchronized with the one in nmigen.back.verilog!
-        "builtin-yosys": ["nmigen-yosys>=0.9.post3527.*"],
+        # this version requirement needs to be synchronized with the requirements in nmigen.back.*!
+        "builtin-yosys": ["nmigen-yosys>=0.9.post3743.*"],
         "remote-build": ["paramiko~=2.7"],
     },
     packages=find_packages(exclude=["tests*"]),
