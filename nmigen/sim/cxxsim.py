@@ -83,7 +83,7 @@ class _CxxSimulation(BaseSimulation):
         self.slots    = []
         self.triggers = {}
 
-        self.rtl_handle  = self.cxxlib.create(self.cxxlib.design_create())
+        self.rtl_handle  = self.cxxlib.create_at(self.cxxlib.design_create(), b"top")
         self.rtl_process = _CxxRTLProcess(self.cxxlib, self.rtl_handle)
 
     def reset(self):
@@ -100,7 +100,7 @@ class _CxxSimulation(BaseSimulation):
         return index
 
     def _add_rtl_signal(self, signal):
-        raw_name = b" ".join(map(str.encode, self.names[signal][1:]))
+        raw_name = " ".join(self.names[signal]).encode()
         signal_parts = self.cxxlib.get_parts(self.rtl_handle, raw_name)
         assert all(part.type == signal_parts[0].type for part in signal_parts)
         if (signal_parts[0].type == cxxrtl_type.VALUE and

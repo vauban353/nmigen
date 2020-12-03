@@ -147,6 +147,10 @@ class cxxrtl_library:
         self.create.argtypes = [cxxrtl_toplevel]
         self.create.restype = cxxrtl_handle
 
+        self.create_at = library.cxxrtl_create_at
+        self.create_at.argtypes = [cxxrtl_toplevel, c_char_p]
+        self.create_at.restype = cxxrtl_handle
+
         self.destroy = library.cxxrtl_destroy
         self.destroy.argtypes = [cxxrtl_handle]
         self.destroy.restype = None

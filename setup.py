@@ -47,7 +47,7 @@ setup(
     ],
     extras_require={
         # this version requirement needs to be synchronized with the requirements in nmigen.back.*!
-        "builtin-yosys": ["nmigen-yosys>=0.9.post3743.*"],
+        "builtin-yosys": ["nmigen-yosys>=0.9.post3746.*"],
         "remote-build": ["paramiko~=2.7"],
     },
     packages=find_packages(exclude=["tests*"]),
