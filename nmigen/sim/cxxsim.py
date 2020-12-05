@@ -1,6 +1,7 @@
 import os
 import tempfile
 from contextlib import contextmanager
+from vcd.gtkw import GTKWSave
 
 from ..hdl import *
 from ..hdl.ast import SignalDict
@@ -235,17 +236,36 @@ class CxxSimEngine(BaseEngine):
 
     @contextmanager
     def write_vcd(self, vcd_file, gtkw_file=None, *, traces=()):
-        # FIXME: write gtkw_file
-        # FIXME: actually use traces
-        with open(vcd_file, "wb") as vcd_file:
-            try:
-                vcd_writer = self._state.cxxlib.vcd_create()
-                self._vcd_writers.append((vcd_writer, vcd_file))
-                self._state.cxxlib.vcd_timescale(vcd_writer, 100, b"ps")
-                self._state.cxxlib.vcd_add_from(vcd_writer, self._state.rtl_handle)
-                yield
-            finally:
-                self._state.cxxlib.vcd_sample(vcd_writer, int(self._timeline.now * 10 ** 10))
-                vcd_file.write(self._state.cxxlib.vcd_read(vcd_writer))
-                self._vcd_writers.remove((vcd_writer, vcd_file))
-                self._state.cxxlib.vcd_destroy(vcd_writer)
+        if isinstance(vcd_file, str):
+            vcd_file = open(vcd_file, "wb")
+        if isinstance(gtkw_file, str):
+            gtkw_file = open(gtkw_file, "wt")
+
+        try:
+            vcd_writer = self._state.cxxlib.vcd_create()
+            self._vcd_writers.append((vcd_writer, vcd_file))
+            self._state.cxxlib.vcd_timescale(vcd_writer, 100, b"ps")
+            self._state.cxxlib.vcd_add_from(vcd_writer, self._state.rtl_handle)
+
+            yield
+        finally:
+            self._state.cxxlib.vcd_sample(vcd_writer, int(self._timeline.now * 10 ** 10))
+            vcd_file.write(self._state.cxxlib.vcd_read(vcd_writer))
+            self._vcd_writers.remove((vcd_writer, vcd_file))
+            self._state.cxxlib.vcd_destroy(vcd_writer)
+
+            if gtkw_file is not None:
+                gtkw_save = GTKWSave(gtkw_file)
+                gtkw_save.dumpfile(vcd_file.name)
+                gtkw_save.dumpfile_size(vcd_file.tell())
+                gtkw_save.treeopen("top")
+                for signal in traces:
+                    if len(signal) > 1 and not signal.decoder:
+                        suffix = "[{}:0]".format(len(signal) - 1)
+                    else:
+                        suffix = ""
+                    gtkw_save.trace(".".join(self._state.names[signal]) + suffix)
+
+            vcd_file.close()
+            if gtkw_file is not None:
+                gtkw_file.close()
