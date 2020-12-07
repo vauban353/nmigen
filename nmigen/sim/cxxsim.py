@@ -168,6 +168,17 @@ class _CxxSimulation(BaseSimulation):
 
 class CxxSimEngine(BaseEngine):
     def __init__(self, fragment):
+        # All undriven signals are converted to toplevel ports by Fragment.prepare(), which is
+        # necessary to enable testbench reuse between pysim and cxxsim; pysim testbenches assume
+        # that any otherwise undriven signal functions like a register, and converting them to
+        # inputs is the only reasonable way to preserve that for cxxsim. However, this conversion
+        # drops the reset value, since the Yosys model only has initial values for registers and
+        # not inputs, which are wires. Preserve the reset value by setting it directly on toplevel
+        # inputs, which is recognized by CXXRTL as an extension to the Yosys model.
+        for port, dir in fragment.ports.items():
+            if dir == "i":
+                port.attrs["init"] = port.reset
+
         yosys = cxxrtl._find_yosys()
         cxx_source, name_map = cxxrtl.convert_fragment(fragment)
 
