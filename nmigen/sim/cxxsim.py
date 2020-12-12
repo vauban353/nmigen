@@ -74,16 +74,19 @@ class _CxxRTLProcess(BaseProcess):
 class _CxxSimulation(BaseSimulation):
     def __init__(self, cxxlib, names):
         self.cxxlib = cxxlib
-        self.names  = names
+        self.names = names
 
-        self.timeline = Timeline()
-        self.signals  = SignalDict()
-        self.slots    = []
-        self.owned    = set()
-        self.triggers = {}
+        self.slots = []
+        self.owned = set()
 
         self.rtl_handle  = self.cxxlib.create_at(self.cxxlib.design_create(), b"top")
         self.rtl_process = _CxxRTLProcess(self.cxxlib, self.rtl_handle)
+        self.rtl_signals = SignalDict()
+
+        self.sim_signals = SignalDict()
+
+        self.timeline = Timeline()
+        self.triggers = {}
 
     def reset(self):
         self.timeline.reset()
@@ -92,16 +95,12 @@ class _CxxSimulation(BaseSimulation):
             signal_state.reset()
 
     def _add_signal(self, signal, signal_parts, *, owned):
-        assert signal not in self.signals
         signal_state = _CxxSignalState(signal, signal_parts)
-
-        index = len(self.slots)
-        self.slots.append(signal_state)
-        self.signals[signal] = index
-
         if owned:
             self.owned.add(signal_state)
 
+        index = len(self.slots)
+        self.slots.append(signal_state)
         return index
 
     def _add_rtl_signal(self, signal):
@@ -133,12 +132,20 @@ class _CxxSimulation(BaseSimulation):
         return self._add_signal(signal, [signal_part], owned=True)
 
     def get_signal(self, signal):
-        if signal in self.signals:
-            return self.signals[signal]
-        elif signal in self.names:
-            return self._add_rtl_signal(signal)
+        if signal in self.names:
+            try:
+                index = self.rtl_signals[signal]
+            except KeyError:
+                index = self._add_rtl_signal(signal)
+                self.rtl_signals[signal] = index
+            return index
         else:
-            return self._add_sim_signal(signal)
+            try:
+                index = self.sim_signals[signal]
+            except KeyError:
+                index = self._add_sim_signal(signal)
+                self.sim_signals[signal] = index
+            return index
 
     def add_trigger(self, process, signal, *, trigger=None):
         self.triggers[process, self.get_signal(signal)] = trigger
@@ -259,11 +266,32 @@ class CxxSimEngine(BaseEngine):
         if isinstance(gtkw_file, str):
             gtkw_file = open(gtkw_file, "wt")
 
+        for trace_signal in traces:
+            # Ensure that all simulation-only signals in `traces` are registered, since it is
+            # not possible to add new signals to a VCD file once data is being streamed into it.
+            self._state.get_signal(trace_signal)
+
         try:
             vcd_writer = self._state.cxxlib.vcd_create()
             self._vcd_writers.append((vcd_writer, vcd_file))
             self._state.cxxlib.vcd_timescale(vcd_writer, 100, b"ps")
             self._state.cxxlib.vcd_add_from(vcd_writer, self._state.rtl_handle)
+
+            used_sim_names = set()
+            sim_names = SignalDict()
+            for signal, index in self._state.sim_signals.items():
+                signal_state = self._state.slots[index]
+                assert len(signal_state.parts) == 1
+
+                signal_name = signal.name
+                name_index = 1
+                while signal_name in used_sim_names:
+                    signal_name = "{}${}".format(signal.name, name_index)
+                    name_index += 1
+
+                self._state.cxxlib.vcd_add(vcd_writer, signal_name.encode(), signal_state.parts[0])
+                used_sim_names.add(signal_name)
+                sim_names[signal] = signal_name
 
             yield
         finally:
@@ -282,7 +310,10 @@ class CxxSimEngine(BaseEngine):
                         suffix = "[{}:0]".format(len(signal) - 1)
                     else:
                         suffix = ""
-                    gtkw_save.trace(".".join(self._state.names[signal]) + suffix)
+                    if signal in self._state.names:
+                        gtkw_save.trace(".".join(self._state.names[signal]) + suffix)
+                    else:
+                        gtkw_save.trace(sim_names[signal] + suffix)
 
             vcd_file.close()
             if gtkw_file is not None:
