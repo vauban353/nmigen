@@ -19,10 +19,13 @@ __all__ = ["CxxSimEngine"]
 
 
 class _CxxSignalState(BaseSignalState):
-    def __init__(self, signal, parts, *, owned):
+    def __init__(self, signal, parts):
         self.signal = signal
         self.parts  = parts
-        self.owned  = owned
+
+    def reset(self):
+        for part in self.parts:
+            part.curr = part.next = self.signal.reset
 
     @property
     def curr(self):
@@ -42,15 +45,7 @@ class _CxxSignalState(BaseSignalState):
         for part in self.parts:
             part.next = value
 
-    def reset(self):
-        assert self.owned
-
-        for part in self.parts:
-            part.curr = part.next = self.signal.reset
-
     def commit(self):
-        assert self.owned
-
         next_value = self.next
         if self.curr == next_value:
             return False
@@ -70,6 +65,8 @@ class _CxxRTLProcess(BaseProcess):
         self.runnable = True
         self.passive  = True
 
+        self.cxxlib.reset(self.handle)
+
     def run(self):
         self.cxxlib.eval(self.handle)
 
@@ -82,6 +79,7 @@ class _CxxSimulation(BaseSimulation):
         self.timeline = Timeline()
         self.signals  = SignalDict()
         self.slots    = []
+        self.owned    = set()
         self.triggers = {}
 
         self.rtl_handle  = self.cxxlib.create_at(self.cxxlib.design_create(), b"top")
@@ -89,41 +87,50 @@ class _CxxSimulation(BaseSimulation):
 
     def reset(self):
         self.timeline.reset()
-        self.cxxlib.reset(self.rtl_handle)
-        for signal_state in self.slots:
-            if signal_state.owned:
-                signal_state.reset()
 
-    def _add_signal(self, signal, signal_state):
+        for signal_state in self.owned:
+            signal_state.reset()
+
+    def _add_signal(self, signal, signal_parts, *, owned):
+        assert signal not in self.signals
+        signal_state = _CxxSignalState(signal, signal_parts)
+
         index = len(self.slots)
         self.slots.append(signal_state)
         self.signals[signal] = index
+
+        if owned:
+            self.owned.add(signal_state)
+
         return index
 
     def _add_rtl_signal(self, signal):
         raw_name = " ".join(self.names[signal]).encode()
         signal_parts = self.cxxlib.get_parts(self.rtl_handle, raw_name)
         assert all(part.type == signal_parts[0].type for part in signal_parts)
+
         if (signal_parts[0].type == cxxrtl_type.VALUE and
                 signal_parts[0].flags & cxxrtl_flag.UNDRIVEN):
             shadow_parts = [cxxrtl_object.create_shadow(part) for part in signal_parts]
-            signal_state = _CxxSignalState(signal, shadow_parts, owned=True)
+            index = self._add_signal(signal, shadow_parts, owned=True)
+
         elif signal_parts[0].type in (cxxrtl_type.WIRE, cxxrtl_type.VALUE, cxxrtl_type.ALIAS):
-            signal_state = _CxxSignalState(signal, signal_parts, owned=False)
+            index = self._add_signal(signal, signal_parts, owned=False)
+
         else:
             assert False, f"unsupported signal type {signal_parts[0].type}"
-        index = self._add_signal(signal, signal_state)
+
         # FIXME: toggling a clock input that is a CXXRTL_WIRE won't work because of how the posedge
         # detector in generated code works; we wake the CXXRTL process while committing, but that
         # means the detector will never fire
         self.triggers[self.rtl_process, index] = None
+
         return index
 
     def _add_sim_signal(self, signal):
-        signal_parts = [cxxrtl_object.create(cxxrtl_type.WIRE, len(signal))]
-        signal_state = _CxxSignalState(signal, signal_parts, owned=True)
-        signal_state.reset()
-        return self._add_signal(signal, signal_state)
+        signal_part = cxxrtl_object.create(cxxrtl_type.WIRE, len(signal))
+        signal_part.curr = signal_part.next = signal.reset
+        return self._add_signal(signal, [signal_part], owned=True)
 
     def get_signal(self, signal):
         if signal in self.signals:
@@ -158,10 +165,10 @@ class _CxxSimulation(BaseSimulation):
 
         if self.cxxlib.commit(self.rtl_handle):
             converged = False
-        for signal_state in self.slots:
-            if signal_state.owned:
-                if signal_state.commit():
-                    converged = False
+
+        for signal_state in self.owned:
+            if signal_state.commit():
+                converged = False
 
         return converged
 
