@@ -1,3 +1,4 @@
+import sys
 from enum import IntEnum, IntFlag
 from ctypes import (cdll, Structure, POINTER, CFUNCTYPE,
                     c_int, c_size_t, c_uint32, c_uint64, c_void_p, c_char_p,
@@ -226,3 +227,22 @@ class cxxrtl_library:
             _vcd_read(vcd, byref(data), byref(size))
             return string_at(data.value, size.value)
         self.vcd_read = vcd_read
+
+
+class cxxrtl_trace_library:
+    def __init__(self, *args, **kwargs):
+        self._library = cxxrtl_library(*args, **kwargs)
+
+    def __getattr__(self, attr_name):
+        if attr_name.startswith("_"):
+            return super().__getattr__(attr_name)
+
+        method = getattr(self._library, attr_name)
+        def wrapper(*args):
+            args_repr = ", ".join(map(repr, args))
+            result = method(*args)
+            print("cxxrtl_{}({})->{!r}".format(attr_name, args_repr, result), file=sys.stderr)
+            return result
+
+        setattr(self, attr_name, wrapper)
+        return wrapper

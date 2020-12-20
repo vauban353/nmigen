@@ -10,7 +10,7 @@ from .._toolchain.cxx import build_cxx
 from ..back import cxxrtl
 from ._base import *
 from ._sched import *
-from ._cxxrtl import cxxrtl_type, cxxrtl_flag, cxxrtl_object, cxxrtl_library
+from ._cxxrtl import cxxrtl_type, cxxrtl_flag, cxxrtl_object, cxxrtl_library, cxxrtl_trace_library
 from ._pycoro import PyCoroProcess
 from ._pyclock import PyClockProcess
 
@@ -208,7 +208,12 @@ class CxxSimEngine(BaseEngine):
             macros=["CXXRTL_NDEBUG", "CXXRTL_INCLUDE_CAPI_IMPL", "CXXRTL_INCLUDE_VCD_CAPI_IMPL"],
             output_name="sim"
         )
-        cxxlib = cxxrtl_library(os.path.join(self._build_dir.name, so_filename))
+
+        full_so_filename = os.path.join(self._build_dir.name, so_filename)
+        if os.getenv("NMIGEN_cxxsim_trace"):
+            cxxlib = cxxrtl_trace_library(full_so_filename)
+        else:
+            cxxlib = cxxrtl_library(full_so_filename)
 
         self._state = _CxxSimulation(cxxlib, name_map)
         self._timeline = self._state.timeline
