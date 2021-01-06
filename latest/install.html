@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Installation &mdash; nMigen toolchain 0.3.dev232 documentation</title>
+  <title>Installation &mdash; nMigen toolchain 0.3.dev236 documentation</title>
   
 
   
@@ -18,7 +18,10 @@
 
   
   
+
   
+  
+
   
 
   
@@ -31,7 +34,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script src="_static/platformpicker.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -54,7 +56,7 @@
           
 
           
-            <a href="cover.html" class="icon icon-home" alt="Documentation Home"> nMigen toolchain
+            <a href="cover.html" class="icon icon-home"> nMigen toolchain
           
 
           
@@ -64,7 +66,7 @@
             
             
               <div class="version">
-                0.3.dev232+gb466b72
+                0.3.dev236+g9af8201
               </div>
             
           
@@ -150,6 +152,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -163,7 +167,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -197,18 +201,18 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>Install <a class="reference external" href="https://brew.sh">Homebrew</a>. Then, install Python and GTKWave by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> brew install python gtkwave
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>brew install python gtkwave
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--debian platform--linux docutils container">
 <p class="platform-title">Debian</p>
 <p>Install Python and GTKWave by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install python3-pip gtkwave
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install python3-pip gtkwave
 </pre></div>
 </div>
 <p>On architectures other than x86_64 and AArch64, install Yosys by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apt-get install yosys
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo apt-get install yosys
 </pre></div>
 </div>
 <p>If Yosys 0.9 (or newer) is not available, <a class="reference external" href="https://github.com/YosysHQ/yosys/#setup">build Yosys from source</a>.</p>
@@ -216,7 +220,7 @@
 <div class="platform-choice platform--arch platform--linux docutils container">
 <p class="platform-title">Arch Linux</p>
 <p>Install Python, pip, GTKWave and Yosys by running:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo pacman -S python python-pip gtkwave yosys
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo pacman -S python python-pip gtkwave yosys
 </pre></div>
 </div>
 </div>
@@ -244,25 +248,25 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>To install the latest release of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--linux platform-noaltname docutils container">
 <p class="platform-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user --upgrade <span class="s1">&#39;nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user --upgrade nmigen
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user --upgrade nmigen
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--arch platform--linux docutils container">
 <p class="platform-title">Arch Linux</p>
 <p>To install the latest release of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo pacman -S python-nmigen
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo pacman -S python-nmigen
 </pre></div>
 </div>
 </div>
@@ -281,18 +285,18 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>To install the latest development snapshot of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="platform-choice platform--linux platform-noaltname docutils container">
 <p class="platform-title">Linux</p>
 <p>If you <strong>did not</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, to install the latest release of nMigen, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>If you <strong>did</strong> install Yosys manually in the previous step, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip3 install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip3 install --user <span class="s1">&#39;git+https://github.com/nmigen/nmigen.git#egg=nmigen&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -320,15 +324,15 @@
 <div class="platform-choice platform--macos platform-noaltname docutils container">
 <p class="platform-title">macOS</p>
 <p>To install an editable development snapshot of nMigen for the first time, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/nmigen/nmigen
-<span class="gp">$</span> <span class="nb">cd</span> nmigen
-<span class="gp">$</span> pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/nmigen/nmigen
+<span class="gp">$ </span><span class="nb">cd</span> nmigen
+<span class="gp">$ </span>pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">nmigen</span></code> directory will immediately affect any code that uses nMigen. To update the snapshot, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> nmigen
-<span class="gp">$</span> git pull --ff-only origin master
-<span class="gp">$</span> pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> nmigen
+<span class="gp">$ </span>git pull --ff-only origin master
+<span class="gp">$ </span>pip install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using nMigen may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
@@ -337,15 +341,15 @@
 <p class="platform-title">Linux</p>
 <p>If you <strong>did</strong> install Yosys manually in the <a class="reference internal" href="#install-deps"><span class="std std-ref">previous step</span></a>, omit <code class="docutils literal notranslate"><span class="pre">[builtin-yosys]</span></code> from the following commands.</p>
 <p>To install an editable development snapshot of nMigen for the first time, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/nmigen/nmigen
-<span class="gp">$</span> <span class="nb">cd</span> nmigen
-<span class="gp">$</span> pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/nmigen/nmigen
+<span class="gp">$ </span><span class="nb">cd</span> nmigen
+<span class="gp">$ </span>pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Any changes made to the <code class="docutils literal notranslate"><span class="pre">nmigen</span></code> directory will immediately affect any code that uses nMigen. To update the snapshot, run:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> nmigen
-<span class="gp">$</span> git pull --ff-only origin master
-<span class="gp">$</span> pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span> nmigen
+<span class="gp">$ </span>git pull --ff-only origin master
+<span class="gp">$ </span>pip3 install --user --editable <span class="s1">&#39;.[builtin-yosys]&#39;</span>
 </pre></div>
 </div>
 <p>Run the <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--editable</span> <span class="pre">.[builtin-yosys]</span></code> command each time the editable development snapshot is updated in case package dependencies have been added or changed. Otherwise, code using nMigen may misbehave or crash with an <code class="docutils literal notranslate"><span class="pre">ImportError</span></code>.</p>
@@ -367,37 +371,29 @@
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="start.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="start.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="intro.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020, nMigen developers
+        &#169; Copyright 2020, nMigen developers.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
