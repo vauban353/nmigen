@@ -218,6 +218,15 @@ class ResourceManager:
                 for bit, pin_name in enumerate(pin_names):
                     yield "{}[{}]".format(port_name, bit), pin_name, attrs
 
+    # TODO: deal with differential IOs
+    def iter_pin_constraints(self):
+        for res, pin, port, attrs in self._ports:
+            if isinstance(res.ios[0], Pins):
+                if not self.should_skip_port_component(port, attrs, "io"):
+                    yield port.io.name, res.ios[0].names[0], res.ios[0].dir
+            else:
+                assert False
+
     def add_clock_constraint(self, clock, frequency):
         if not isinstance(clock, Signal):
             raise TypeError("Object {!r} is not a Signal".format(clock))
