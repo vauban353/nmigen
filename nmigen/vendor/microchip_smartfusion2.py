@@ -26,6 +26,18 @@ class MicrochipSmartFusion2Platform(TemplatedPlatform):
         else:
             return "OUTPUT"
 
+    def iter_smartfusion2_pin_constraints(self):
+        for res, pin, port, attrs in self._ports:
+            if isinstance(res.ios[0], Pins):
+                if not self.should_skip_port_component(port, attrs, "io"):
+                    if "DEDICATED_IO" in attrs:
+                        pin_contraints_attrs = ""
+                    else:
+                        pin_contraints_attrs = "-iostd LVCMOS25 -RES_PULL None -fixed yes"
+                    yield port.io.name, res.ios[0].map_names(self._conn_pins, res)[0], res.ios[0].dir, pin_contraints_attrs
+            else:
+                assert False
+
     file_templates = {
         **TemplatedPlatform.build_script_templates,
         "build_{{name}}.sh": r"""
@@ -57,6 +69,7 @@ class MicrochipSmartFusion2Platform(TemplatedPlatform):
 
             import_files \
                 -convert_EDN_to_HDL 0 \
+                -io_pdc {./top.pdc} \
                 -hdl_source {./top.v}
             
             save_project
@@ -64,6 +77,12 @@ class MicrochipSmartFusion2Platform(TemplatedPlatform):
             build_design_hierarchy
             
             set_root -module {top::work}
+            
+            organize_tool_files \
+                -tool {PLACEROUTE} \
+                -file "./libera-a/constraint/io/top.pdc" \
+                -module {top::work} \
+                -input_type {constraint}
             
             update_and_run_tool -name {PLACEROUTE}
             
@@ -81,9 +100,10 @@ class MicrochipSmartFusion2Platform(TemplatedPlatform):
         #
         # I/O constraints
         #
-        {% for port_name, pin_name, pin_direction in platform.iter_pin_constraints() -%}
-            set_io {{port_name}} -DIRECTION {{platform.get_direction(pin_direction)}} -pinname {{pin_name}} -iostd LVCMOS25 -FF_IO_STATE TRISTATE -RES_PULL None -FF_IO_AVAIL No -SLEW SLOW -OUT_DRIVE 4 -OUT_LOAD 5 -fixed yes
+        {% for port_name, pin_name, pin_direction, contraints_attrs in platform.iter_smartfusion2_pin_constraints() -%}
+            set_io {{port_name}} -DIRECTION {{platform.get_direction(pin_direction)}} -pinname {{pin_name}} {{contraints_attrs}}
         {% endfor %}
+
         """
 
     }
@@ -116,7 +136,6 @@ class MicrochipSmartFusion2Platform(TemplatedPlatform):
         m.submodules[pin.name] = Instance("OUTBUF",
             o_PAD=port.io,
             i_D=pin.o,
-#            o_PAD=port.name,
         )
         return m
 
