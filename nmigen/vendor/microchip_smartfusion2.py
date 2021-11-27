@@ -70,6 +70,8 @@ class MicrochipSmartFusion2Platform(TemplatedPlatform):
             import_files \
                 -convert_EDN_to_HDL 0 \
                 -io_pdc {./top.pdc} \
+                {% for file in platform.iter_files(".v") +%}    -hdl_source {{file|tcl_escape}} \
+                {% endfor %}
                 -hdl_source {./top.v}
             
             save_project
