@@ -127,10 +127,16 @@ class MicrochipSmartFusion2Platform(TemplatedPlatform):
         self._check_feature("single-ended input", pin, attrs,
                             valid_xdrs=(0, 1, 2), valid_attrs=True)
         m = Module()
-        m.submodules[pin.name] = Instance("INBUF",
-            i_PAD=port.io,
-            o_Y=pin.i
-        )
+        if pin.name == 'DEVRST_N_0':
+            m.submodules[pin.name] = Instance("SYSRESET",
+                                              i_DEVRST_N=port.io,
+                                              o_POWER_ON_RESET_N=pin.i
+                                              )
+        else:
+            m.submodules[pin.name] = Instance("INBUF",
+                i_PAD=port.io,
+                o_Y=pin.i
+            )
         return m
 
 
